@@ -2,6 +2,8 @@ const express = require("express")
 const app = express()
 // admin , user , category,produts
 const userRouter = require("./routers/userRouter")
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 app.use("/user",userRouter)
 app.get("/",(req,res)=>
 {
