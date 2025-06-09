@@ -20,4 +20,19 @@ router.get("/:id",async(req,res)=>
     let students = await studentController.getStudentById(id)
     res.send({data:students})
 })
+router.put("/",async(req,res)=>
+{
+    let id = req.body.id;
+  let s = {name:req.body.name,
+        age:parseInt(req.body.age)
+        ,city:req.body.city}
+        let m = await studentController.updateStudent(id,s)
+        res.send(m)  
+})
+router.delete("/:id",async(req,res)=>
+{
+    let id = req.params.id;
+    let msg = await studentController.deleteStudent(id)
+    res.send(msg)
+})
 module.exports = router

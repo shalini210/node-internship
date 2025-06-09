@@ -35,3 +35,20 @@ exports.getStudentById =async (id)=>
     .catch((e)=>students = e)
     return students
 }
+exports.updateStudent = async (id,newdata)=>
+{
+    let msg = "";
+    
+    await studentModel.findByIdAndUpdate(id,{$set:newdata})
+    .then((d)=>msg = "REcord updated")
+    .catch((err)=>msg = err)
+    return msg 
+}
+exports.deleteStudent = async(id)=>
+{
+    let msg = "";  
+    await studentModel.findByIdAndDelete(id)
+    .then((d)=>msg="record delete")
+    .catch((err)=>msg = err)
+    return msg 
+}
