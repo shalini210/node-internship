@@ -14,6 +14,10 @@ router.get("/",async(req,res)=>
     let students = await studentController.getStudents()
     res.send({data:students})
 })
+router.get("/city",async (req,res)=>{
+    let data = await studentController.getcities()
+    res.send(data)
+})
 router.get("/:id",async(req,res)=>
 {
     let id = req.params.id

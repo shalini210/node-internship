@@ -10,7 +10,7 @@ exports.insertStudent =async (s)=>
     })
    await studnet.save()
     .then(()=>{msg = "Record Inserted"})     
-    .catch((err)=>msg = "err occured")
+    .catch((err)=>msg = "err occured"+err)
     let data = [];
     if(msg=="Record Inserted")
     {
@@ -22,10 +22,15 @@ exports.insertStudent =async (s)=>
 exports.getStudents = async()=>
 {
     let students = [];
-    await studentModel.find()
+    await studentModel.find()        //.sort({name:1}) //.distinct("city")
     .then((d)=>students=d)
     .catch((e)=>students = e)
     return students
+}
+exports.getcities = async()=>
+{
+    let data = await studentModel.distinct("city")
+    return data
 }
 exports.getStudentById =async (id)=>
 {
@@ -38,17 +43,29 @@ exports.getStudentById =async (id)=>
 exports.updateStudent = async (id,newdata)=>
 {
     let msg = "";
-    
+    let data = []
     await studentModel.findByIdAndUpdate(id,{$set:newdata})
-    .then((d)=>msg = "REcord updated")
+    .then(async (d)=>{
+        msg = "REcord updated"
+        await studentModel.find()
+        .then((da)=>data=da)
+    })
     .catch((err)=>msg = err)
-    return msg 
+    
+    return {msg:msg,data:data }
 }
 exports.deleteStudent = async(id)=>
 {
     let msg = "";  
+    let data = [];
     await studentModel.findByIdAndDelete(id)
-    .then((d)=>msg="record delete")
+    .then(async (d)=>
+        {
+            msg="record delete"
+            await studentModel.find()
+        .then((da)=>data = da)
+    }
+    )
     .catch((err)=>msg = err)
-    return msg 
+    return {msg:msg,data:data} 
 }

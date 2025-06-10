@@ -2,8 +2,19 @@ const mongoose = require("mongoose")
 
 let studentSchema  = mongoose.Schema(
     {
-        name:   String,
-        age:Number,
+        name: 
+        {type:  String,
+            required:true},
+
+//          name: {
+//     type: String,
+//     required: true
+//   }
+        age:
+        { type:Number,
+            required:true,
+               min:  [1, 'atleast 1 '],
+             max:  [120,"max 120"]},
         city:String    
     }
 )
