@@ -1,0 +1,23 @@
+enter your name :
+press 1 to create your basic details file 
+press 2 to read your basic details file
+press 3 to append data to your basic details file
+press 4 to delete your file 
+
+john 
+1
+enter name :
+enter contact no :
+enter address : 
+
+save to file with name name.txt
+
+2
+show data of file name.txt where name is name entered by user
+
+3
+enter new data : 
+slskf ;akd asdlk
+press s to save 
+data saved  
+
