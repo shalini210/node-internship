@@ -2,8 +2,11 @@ const express = require("express")
 const dbconfig = require("./dbconfig")
 const studentRouter = require("./routers/studentRouter")
 const app = express()
+const cors = require("cors")
 // admin , user , category,produts
+
 const userRouter = require("./routers/userRouter")
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use("/user",userRouter)

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        async function  showStudents()
+        {
+              var students = []
+       await    fetch("http://localhost:8080/student")
+            .then((d)=>d.json())
+            .then((data)=>            
+        {
+            students=data
+            console.log(students)
+        })
+        
+        let ui = students.data.map((student)=>
+           {
+             return `<tr><td>${student.name}</td>
+            <td>${student.age}</td>
+            <td>${student.city}</td></tr>`
+          }).join("")
+    document.getElementById("tbdy").innerHTML=ui
+        }
+    </script>
+</head>
+<body onload="showStudents()">
+    <form action="http://localhost:8080/student" method="post">
+        <label for="txtname">NAme</label>
+        <input type="text" name="name" id="txtname">
+        <br>
+        <label for="txtage">Age</label>
+        <input type="number" name="age" id="txtage">
+        <br>
+
+        <label for="txtcity">City</label>
+        <input type="text" name="city" id="txtcity">
+        <br>
+        <input type="submit" value="Save">
+        <input type="reset" value="Cancel">
+    </form>
+    <h1>STudents </h1>
+    <table border="">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>age</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody id="tbdy">
+
+        </tbody>
+    </table>
+</body>
+</html>
